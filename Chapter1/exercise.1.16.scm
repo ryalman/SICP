@@ -1,0 +1,6 @@
+(define (iterative-fast-expt b n)
+  (define (iter a b n)
+    (cond ((= n 1) (* a b))
+          ((odd? n) (iter (* a b) b (- n 1)))
+          (else (iter a (* b b) (/ n 2)))))
+  (iter 1 b n))

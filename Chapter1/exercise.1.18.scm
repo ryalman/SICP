@@ -1,0 +1,8 @@
+(define (fast-mult a b)
+  (define (double x) (+ x x))
+  (define (halve x) (/ x 2))
+  (define (mult-iter p x y)
+    (cond ((= y 1) (+ p x))
+          ((even? y) (mult-iter p (double x) (halve y)))
+          (else (mult-iter (+ p x) x (- y 1)))))
+  (mult-iter 0 a b))

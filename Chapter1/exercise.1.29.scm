@@ -1,0 +1,7 @@
+(define (simpson-integral f a b n)
+  (define (iter s k h)
+    (cond ((> k n) (* (/ h 3) s))
+          ((or (= 0 k) (= n k)) (iter (+ s (f (+ a (* k h)))) (+ k 1) h))
+          ((even? k) (iter (+ s (* 2 (f (+ a (* k h))))) (+ k 1) h))
+          (else (iter (+ s (* 4 (f (+ a (* k h))))) (+ k 1) h))))
+  (iter 0 0 (/ (- b a) n)))
