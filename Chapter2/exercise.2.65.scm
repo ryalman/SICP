@@ -1,0 +1,23 @@
+(load "example.representing.sets.scm")
+
+(define (union-set set1 set2)
+  (define (union list1 list2)
+    (cond ((null? list1) list2)
+          ((null? list2) list1)
+          ((= (car list1) (car list2))
+           (cons (car list1) (union (cdr list1) (cdr list2))))
+          ((< (car list1) (car list2))
+           (cons (car list1) (union (cdr list1) list2)))
+          (else (cons (car list2) (union list1 (cdr list2))))))
+  (list->tree (union (tree->list-2 set1) (tree->list-2 set2))))
+
+(define (intersection-set set1 set2)
+  (define (intersect list1 list2)
+    (cond ((or (null? list1) (null? list2)) '())
+          ((= (car list1) (car list2))
+           (cons (car list1) (intersect (cdr list1) (cdr list2))))
+          ((< (car list1) (car list2))
+           (intersect (cdr list1) list2))
+          (else (intersect list1 (cdr list2)))))
+  (list->tree (intersect (tree->list-2 set1) (tree->list-2 set2))))
+
