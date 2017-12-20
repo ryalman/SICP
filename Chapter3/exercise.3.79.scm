@@ -1,0 +1,5 @@
+(define (solve-2nd f dt y0 dy0)
+  (define y (integral (delay dy) y0 dt))
+  (define dy (integral (delay d2y) dy0 dt))
+  (define d2y (stream-map f dy y))
+  y)
