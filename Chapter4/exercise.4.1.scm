@@ -1,0 +1,11 @@
+(define (list-of-values-ltr exp env)
+  (if (no-operands? exp)
+    '()
+    (append (list (eval (first-operand exp) env))
+                      (list-of-values-ltr (rest-operands exp) env))))
+
+(define (list-of-values-rtl exp env)
+  (if (no-operands? ex)
+    '()
+    (append (list-of-values-rtl (rest-operands exp) env)
+            (list (eval (first-operand exp) env)))))
